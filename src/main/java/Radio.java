@@ -1,35 +1,60 @@
 public class Radio {
+
     private int currentRadioStationNumber;
-    private int soundVolume;
+    private int currentVolume = 50;
+    private int numberOfStations = 10;
+    private int maxStation = 9;
+
+
+
+    public Radio() {
+    }
+
+    public Radio(int numberOfStations) {
+        this.numberOfStations = numberOfStations;
+        maxStation = numberOfStations - 1;
+    }
+
+
 
     public int getCurrentRadioStationNumber() {
         return currentRadioStationNumber;
     }
 
-    public void setCurrentRadioStationNumber(int borderedCurrentRadioStationNumber) {
-        if (borderedCurrentRadioStationNumber < 0) {
-            return;
-        }
-        if (borderedCurrentRadioStationNumber > 9) {
-            return;
-        }
-        currentRadioStationNumber = borderedCurrentRadioStationNumber;
+    public int getVolume() {
+        return currentVolume;
     }
 
-    public int getSoundVolume() {
-        return soundVolume;
+    public int getNumberOfStations() {
+
+        return numberOfStations;
     }
 
-    public void setSoundVolume(int boardedSoundVolume) {
-        if (boardedSoundVolume < 0) {
-            soundVolume = 0;
-        } else if (boardedSoundVolume > 10) {
-            soundVolume = 0;
-        } else soundVolume = boardedSoundVolume;
+
+    public void setCurrentRadioStationNumber(int newCurrentRadioStationNumber) {
+        if (newCurrentRadioStationNumber < 0) {
+            return;
+        }
+        ;
+        if (newCurrentRadioStationNumber > maxStation) {
+            return;
+        }
+        currentRadioStationNumber = newCurrentRadioStationNumber;
     }
+
+    public void setVolume(int newCurrentVolume) {
+        if (newCurrentVolume < 0) {
+            return;
+        }
+        if (newCurrentVolume > 100) {
+            return;
+        }
+        currentVolume = newCurrentVolume;
+    }
+
 
     public void next() {
-        if (currentRadioStationNumber < 9) {
+        if (currentRadioStationNumber < maxStation) {
             currentRadioStationNumber++;
         } else {
             currentRadioStationNumber = 0;
@@ -37,26 +62,27 @@ public class Radio {
     }
 
     public void prev() {
-        if (currentRadioStationNumber > 0) {
+        if (currentRadioStationNumber == 0) {
+            currentRadioStationNumber = maxStation;
+        } else {
             currentRadioStationNumber--;
-        } else {
-            currentRadioStationNumber = 9;
         }
     }
 
-    public void increase() {
-        if (soundVolume < 10) {
-            soundVolume++;
+    public void increaseVolume() {
+        if (currentVolume == 100) {
+            return;
         } else {
-            soundVolume = 0;
+            currentVolume++;
         }
     }
 
-    public void decrease() {
-        if (soundVolume > 0) {
-            soundVolume--;
+    public void reduceVolume() {
+        if (currentVolume == 0) {
+            return;
         } else {
-            soundVolume = 10;
+            currentVolume--;
         }
     }
+
 }
